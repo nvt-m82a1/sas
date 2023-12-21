@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SAS.Manage\SAS.Public.csproj" />
+    <ProjectReference Include="..\SAS.Messages.RabbitMQ\SAS.Messages.RabbitMQ.csproj" />
+    <ProjectReference Include="..\SAS.Messages\SAS.Messages.csproj" />
+  </ItemGroup>
+
+</Project>
