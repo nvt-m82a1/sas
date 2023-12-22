@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using SAS.Manage.Scheduler.Handler;
 using SAS.Manage.Scheduler.Mailboxs;
 using SAS.Manage.Scheduler.Mod;
+using SAS.Manage.Scheduler.ServiceJobs;
 using SAS.Messages.Abs;
 using SAS.Messages.RabbitMQ.Mod;
 
@@ -22,6 +23,9 @@ namespace SAS.Manage.Scheduler
 
                 services.AddKeyedScoped<IMessageHandler, NewOrderHandler>("new.order");
                 services.AddKeyedScoped<IMessageHandler, UpdateStateHandler>("update.state");
+
+                services.AddHostedService<UpdateTimeAnalyst>();
+                services.AddHostedService<ScanLateIncome>();
             });
 
             var host = builder.Build();
