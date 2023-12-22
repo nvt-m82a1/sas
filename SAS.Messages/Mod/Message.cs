@@ -2,8 +2,12 @@
 {
     public class Message
     {
-        public Guid Id { get; set; }
-        public IDictionary<string, object> Header { get; set; }
-        public byte[] Body { get; set; }
+        public string? Id { get; set; }
+        public string? CorrelationId { get; set; }
+        public byte Priority { get; set; }
+        public IDictionary<string, object>? Header { get; set; }
+        public string? UserId { get; set; }
+        public required string Type { get; set; }
+        public byte[]? Body { get; set; }
     }
 }
