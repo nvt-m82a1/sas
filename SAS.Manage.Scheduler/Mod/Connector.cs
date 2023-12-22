@@ -1,4 +1,5 @@
-﻿using SAS.Manage.Scheduler.Mailboxs;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SAS.Manage.Scheduler.Mailboxs;
 using SAS.Messages.Mod;
 using SAS.Messages.RabbitMQ.Mod;
 
@@ -6,30 +7,26 @@ namespace SAS.Manage.Scheduler.Mod
 {
     internal class Connector
     {
-        private Station Station { get; set; }
+        private IServiceProvider services { get; set; }
 
-        public Connector()
+        public Connector(IServiceProvider services)
         {
-            Station = new RabbitMQStation();
-            Station.Connect();
+            this.services = services;
+        }
 
-            Station.Registry(new Address()
+        public async Task Connect()
+        {
+            var scheduler = services.GetRequiredService<MScheduler>();
+            var station = services.GetRequiredService<RabbitMQStation>();
+
+            await station.Registry(new Address()
             {
                 Channel = "Scheduler_App",
                 Exchange = "Scheduler_App_Exchange",
                 ExchangeType = "direct",
                 Queue = "Scheduler_App_Queue",
                 RoutingKey = "app.scheduler",
-            }, new MBOrder());
-
-            Station.Registry(new Address()
-            {
-                Channel = "Scheduler_App",
-                Exchange = "Scheduler_App_Exchange",
-                ExchangeType = "direct",
-                Queue = "Scheduler_App_Queue",
-                RoutingKey = "app.scheduler",
-            }, new MBState());
+            }, scheduler);
         }
     }
 }

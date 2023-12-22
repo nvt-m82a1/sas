@@ -2,12 +2,13 @@
 using RabbitMQ.Client.Events;
 using SAS.Messages.Mod;
 using System.Collections.Concurrent;
+using System.Net;
 
 namespace SAS.Messages.RabbitMQ.Mod
 {
     public class RabbitMQStation : Station
     {
-        private IConnection? connection { get; set; }
+        private IConnection connection { get; set; }
         private Map map { get; set; }
         private ConcurrentDictionary<Guid, string?> consumers { get; set; }
 
@@ -15,10 +16,7 @@ namespace SAS.Messages.RabbitMQ.Mod
         {
             map = new Map(nameof(RabbitMQStation));
             consumers = new ConcurrentDictionary<Guid, string?>();
-        }
 
-        public override Task Connect()
-        {
             ConnectionFactory factory = new ConnectionFactory();
             factory.UserName = "guest";
             factory.Password = "guest";
@@ -29,17 +27,26 @@ namespace SAS.Messages.RabbitMQ.Mod
             factory.DispatchConsumersAsync = true;
 
             connection = factory.CreateConnection();
+        }
+
+        public override Task Connect(string channel)
+        {
+            if (!map.Has(channel))
+            {
+                IModel newChannel = connection.CreateModel();
+                map.Add(channel, newChannel);
+            }
+
             return Task.CompletedTask;
         }
 
-        public override Task<bool> Registry(Address address, Mailbox mailbox)
+        public override async Task<bool> Registry(Address address, Mailbox mailbox)
         {
-            if (connection == null) return Task.FromResult(false);
+            if (connection == null) return false;
 
             if (!map.Has(address.Channel))
             {
-                IModel newChannel = connection.CreateModel();
-                map.Add(address.Channel, newChannel);
+                await Connect(address.Channel);
             }
 
             var channel = map[address.Channel]!.Data as IModel;
@@ -85,10 +92,10 @@ namespace SAS.Messages.RabbitMQ.Mod
                 }
             }
 
-            return Task.FromResult(true);
+            return true;
         }
 
-        public override Task<bool> Send(Address address, Message message)
+        public override Task<bool> Publish(Address address, Message message)
         {
             if (!address.ValidExchaneRouting)
             {

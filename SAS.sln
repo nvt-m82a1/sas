@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAS.Manage.Scheduler", "SAS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAS.Manage.Supervisor", "SAS.Manage.Supervisor\SAS.Manage.Supervisor.csproj", "{9B3B00A6-6929-469A-92FD-FB97F8CAEE30}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAS.Public", "SAS.Manage\SAS.Public.csproj", "{A8F2EEB3-E261-4832-8B88-7F858DE9D5B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAS.Public", "SAS.Public\SAS.Public.csproj", "{A8F2EEB3-E261-4832-8B88-7F858DE9D5B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZTests.SAS.Public", "SAS.Public.Tests\ZTests.SAS.Public.csproj", "{579A78A1-0CF9-49F1-AB76-8EDEE8B80291}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZTests.SAS.Public", "SAS.Public.Tests\ZTests.SAS.Public.csproj", "{579A78A1-0CF9-49F1-AB76-8EDEE8B80291}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

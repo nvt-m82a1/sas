@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SAS.Manage\SAS.Public.csproj" />
+    <ProjectReference Include="..\SAS.Public\SAS.Public.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SAS.Manage\SAS.Public.csproj" />
+    <ProjectReference Include="..\SAS.Messages.RabbitMQ\SAS.Messages.RabbitMQ.csproj" />
+    <ProjectReference Include="..\SAS.Public\SAS.Public.csproj" />
   </ItemGroup>
 
 </Project>

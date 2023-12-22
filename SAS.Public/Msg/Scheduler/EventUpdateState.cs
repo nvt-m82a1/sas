@@ -1,6 +1,6 @@
 ﻿namespace SAS.Public.Msg.Scheduler
 {
-    public class MsgUpdateState
+    public class EventUpdateState
     {
         public Guid RelationId { get; set; }
         public int Index { get; set; }

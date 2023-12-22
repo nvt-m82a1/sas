@@ -38,9 +38,9 @@ namespace SAS.Messages.Mod
             var location = this;
             for (int i = 0; i < names.Length; i++)
             {
-                if (location.Has(names[i]))
+                if (location!.Has(names[i]))
                 {
-                    location = Locations![names[i]];
+                    location = location![names[i]];
                 }
                 else
                 {
