@@ -7,35 +7,111 @@ namespace SAS.Public.Def.Convert
     {
         public static DataTypes Instance = new DataTypes();
 
-        private ConcurrentDictionary<int, IEnumerable<(string?, PropertyInfo)>> map;
+        private ConcurrentDictionary<Guid, IEnumerable<TypeResult>> maps;
         private DataTypes()
         {
-            map = new ConcurrentDictionary<int, IEnumerable<(string?, PropertyInfo)>>();
+            maps = new ConcurrentDictionary<Guid, IEnumerable<TypeResult>>();
         }
 
-        public IEnumerable<(string? typeFullname, PropertyInfo info)> CheckProps<T>() where T : class
+        public class TypeResult
         {
-            var hashcode = typeof(T).GetHashCode();
-            if (!map.ContainsKey(hashcode))
+            public string? TypeFullName;
+            public TypeIndex Index = TypeIndex.Unknow;
+            public FieldInfo? FieldInfo;
+            public PropertyInfo? PropertyInfo;
+
+            public object? GetValue(object obj)
             {
-                var props = typeof(T).GetProperties();
-                IEnumerable<(string? fullname, PropertyInfo info)> infos = props
+                switch (Index)
+                {
+                    case TypeIndex.Unknow: break;
+                    case TypeIndex.Field: return FieldInfo!.GetValue(obj);
+                    case TypeIndex.Prop: return PropertyInfo!.GetValue(obj);
+                }
+                return null;
+            }
+
+            public void SetValue(object? obj, object? value)
+            {
+                switch (Index)
+                {
+                    case TypeIndex.Unknow: break;
+                    case TypeIndex.Field: FieldInfo!.SetValue(obj, value); break;
+                    case TypeIndex.Prop: PropertyInfo!.SetValue(obj, value); break;
+                }
+            }
+
+            public string Name()
+            {
+                switch (Index)
+                {
+                    case TypeIndex.Unknow: break;
+                    case TypeIndex.Field: return FieldInfo!.Name;
+                    case TypeIndex.Prop: return PropertyInfo!.Name;
+                }
+                return string.Empty;
+            }
+        }
+
+        public enum TypeIndex { Unknow, Field, Prop }
+
+        public IEnumerable<TypeResult> CheckMembers<T>() where T : class
+        {
+            var typeId = typeof(T).GUID;
+            if (!maps.ContainsKey(typeId))
+            {
+                var memberFields = typeof(T).GetFields();
+                IEnumerable<TypeResult> fieldsResult = memberFields
+                    .Select(p =>
+                    {
+                        if (p.FieldType.Name == DataNames.Name_Nulable && p.FieldType.IsGenericType)
+                        {
+                            return new TypeResult()
+                            {
+                                TypeFullName = p.FieldType.GetGenericArguments()[0].FullName,
+                                Index = TypeIndex.Field,
+                                FieldInfo = p,
+                            };
+                        }
+                        else
+                        {
+                            return new TypeResult()
+                            {
+                                TypeFullName = p.FieldType.FullName,
+                                Index = TypeIndex.Field,
+                                FieldInfo = p,
+                            };
+                        }
+                    });
+
+                var memberProps = typeof(T).GetProperties();
+                IEnumerable<TypeResult> propsResult = memberProps
                     .Select(p =>
                     {
                         if (p.PropertyType.Name == DataNames.Name_Nulable && p.PropertyType.IsGenericType)
                         {
-                            return (p.PropertyType.GetGenericArguments()[0].FullName, p);
+                            return new TypeResult()
+                            {
+                                TypeFullName = p.PropertyType.GetGenericArguments()[0].FullName,
+                                Index = TypeIndex.Prop,
+                                PropertyInfo = p,
+                            };
                         }
                         else
                         {
-                            return (p.PropertyType.FullName, p);
+                            return new TypeResult()
+                            {
+                                TypeFullName = p.PropertyType.FullName,
+                                Index = TypeIndex.Prop,
+                                PropertyInfo = p,
+                            };
                         }
                     });
 
-                map[hashcode] = infos;
+                maps[typeId] = fieldsResult.Concat(propsResult);
             }
 
-            return map[hashcode];
+            return maps[typeId];
         }
     }
 }

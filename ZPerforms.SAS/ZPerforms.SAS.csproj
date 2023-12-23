@@ -7,4 +7,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SAS.Public\SAS.Public.csproj" />
+    <ProjectReference Include="..\ZTests.SAS.Public\ZTests.SAS.Public.csproj" />
+  </ItemGroup>
+
 </Project>

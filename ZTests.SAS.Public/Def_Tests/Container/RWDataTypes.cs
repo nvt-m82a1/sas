@@ -8,7 +8,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_mbool()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.mbool);
 
@@ -19,7 +19,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_mbyte()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.mbyte);
 
@@ -30,7 +30,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_msbyte()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.msbyte);
 
@@ -41,7 +41,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_mchar()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.mchar);
 
@@ -52,7 +52,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_mdecimal()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.mdecimal);
 
@@ -63,7 +63,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_mdouble()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.mdouble);
 
@@ -74,7 +74,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_mfloat()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.mfloat);
 
@@ -85,7 +85,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_mint()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.mint);
 
@@ -96,7 +96,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_muint()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.muint);
 
@@ -107,7 +107,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_mlong()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.mlong);
 
@@ -118,7 +118,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_mshort()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.mshort);
 
@@ -129,7 +129,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_mushort()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.mushort);
 
@@ -140,7 +140,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_types()
         {
-            var template = ModelTemplateTests.TypesTemplate.TypesValue;
+            var template = Model_Template.TypesTemplate.TypesValueRandom;
             var dataWriter = new DataWriter();
             dataWriter.Add(template.mbool);
             dataWriter.Add(template.mbyte);

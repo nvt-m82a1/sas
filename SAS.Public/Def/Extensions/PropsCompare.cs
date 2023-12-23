@@ -6,15 +6,15 @@ namespace SAS.Public.Def.Extensions
     {
         public static (bool same, string? firstDiff) Compare<T>(T expected, T actual) where T : class
         {
-            var props = DataTypes.Instance.CheckProps<T>();
+            var members = DataTypes.Instance.CheckMembers<T>();
 
-            foreach (var prop in props)
+            foreach (var member in members)
             {
-                var left = prop.info.GetValue(expected);
-                var right = prop.info.GetValue(actual);
+                var left = member.GetValue(expected);
+                var right = member.GetValue(actual);
 
                 bool equal;
-                switch (prop.typeFullname)
+                switch (member.TypeFullName)
                 {
                     // 1
                     case DataNames.FullName_Boolean: equal = ((bool?)left == (bool?)right); break;
@@ -54,7 +54,7 @@ namespace SAS.Public.Def.Extensions
 
                     default: equal = Object.ReferenceEquals(left, right); break;
                 }
-                if (!equal) return (false, prop.info.Name);
+                if (!equal) return (false, member.Name());
             }
 
             return (true, null);

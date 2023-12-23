@@ -8,81 +8,81 @@ namespace SAS.Public.Def.Data
         public static DataRandom Instance = new DataRandom();
         private DataRandom() { }
 
-        public void FillPropsMin<T>(T o) where T : class, new()
+        public void FillMembersMin<T>(T o) where T : class, new()
         {
-            var props = DataTypes.Instance.CheckProps<T>();
+            var members = DataTypes.Instance.CheckMembers<T>();
 
-            foreach (var prop in props)
+            foreach (var member in members)
             {
-                switch (prop.typeFullname)
+                switch (member.TypeFullName)
                 {
                     // 1
-                    case DataNames.FullName_Boolean: prop.info.SetValue(o, false); break;
-                    case DataNames.FullName_Byte: prop.info.SetValue(o, Byte.MinValue); break;
-                    case DataNames.FullName_SByte: prop.info.SetValue(o, SByte.MinValue); break;
+                    case DataNames.FullName_Boolean: member.SetValue(o, false); break;
+                    case DataNames.FullName_Byte: member.SetValue(o, Byte.MinValue); break;
+                    case DataNames.FullName_SByte: member.SetValue(o, SByte.MinValue); break;
 
                     // 2
-                    case DataNames.FullName_Char: prop.info.SetValue(o, Char.MinValue); break;
-                    case DataNames.FullName_Int16: prop.info.SetValue(o, Int16.MinValue); break;
-                    case DataNames.FullName_UInt16: prop.info.SetValue(o, UInt16.MinValue); break;
+                    case DataNames.FullName_Char: member.SetValue(o, Char.MinValue); break;
+                    case DataNames.FullName_Int16: member.SetValue(o, Int16.MinValue); break;
+                    case DataNames.FullName_UInt16: member.SetValue(o, UInt16.MinValue); break;
 
                     // 4
-                    case DataNames.FullName_Int32: prop.info.SetValue(o, Int32.MinValue); break;
-                    case DataNames.FullName_UInt32: prop.info.SetValue(o, UInt32.MinValue); break;
-                    case DataNames.FullName_Single: prop.info.SetValue(o, Single.MinValue); break;
+                    case DataNames.FullName_Int32: member.SetValue(o, Int32.MinValue); break;
+                    case DataNames.FullName_UInt32: member.SetValue(o, UInt32.MinValue); break;
+                    case DataNames.FullName_Single: member.SetValue(o, Single.MinValue); break;
 
                     // 8
-                    case DataNames.FullName_Double: prop.info.SetValue(o, Double.MinValue); break;
-                    case DataNames.FullName_Int64: prop.info.SetValue(o, Int64.MinValue); break;
+                    case DataNames.FullName_Double: member.SetValue(o, Double.MinValue); break;
+                    case DataNames.FullName_Int64: member.SetValue(o, Int64.MinValue); break;
 
                     // 16
-                    case DataNames.FullName_Decimal: prop.info.SetValue(o, Decimal.MinValue); break;
+                    case DataNames.FullName_Decimal: member.SetValue(o, Decimal.MinValue); break;
 
                     // ref
-                    case DataNames.FullName_String: prop.info.SetValue(o, null); break;
-                    case DataNames.FullName_DateTime: prop.info.SetValue(o, DateTime.MinValue); break;
-                    case DataNames.FullName_Guid: prop.info.SetValue(o, null); break;
+                    case DataNames.FullName_String: member.SetValue(o, null); break;
+                    case DataNames.FullName_DateTime: member.SetValue(o, DateTime.MinValue); break;
+                    case DataNames.FullName_Guid: member.SetValue(o, null); break;
 
                     default: break;
                 }
             }
         }
 
-        public void FillPropsMax<T>(T o) where T : class, new()
+        public void FillMembersMax<T>(T o) where T : class, new()
         {
-            var props = DataTypes.Instance.CheckProps<T>();
+            var members = DataTypes.Instance.CheckMembers<T>();
 
-            foreach (var prop in props)
+            foreach (var member in members)
             {
-                switch (prop.typeFullname)
+                switch (member.TypeFullName)
                 {
                     // 1
-                    case DataNames.FullName_Boolean: prop.info.SetValue(o, true); break;
-                    case DataNames.FullName_Byte: prop.info.SetValue(o, Byte.MaxValue); break;
-                    case DataNames.FullName_SByte: prop.info.SetValue(o, SByte.MaxValue); break;
+                    case DataNames.FullName_Boolean: member.SetValue(o, true); break;
+                    case DataNames.FullName_Byte: member.SetValue(o, Byte.MaxValue); break;
+                    case DataNames.FullName_SByte: member.SetValue(o, SByte.MaxValue); break;
 
                     // 2
-                    case DataNames.FullName_Char: prop.info.SetValue(o, Char.MaxValue); break;
-                    case DataNames.FullName_Int16: prop.info.SetValue(o, Int16.MaxValue); break;
-                    case DataNames.FullName_UInt16: prop.info.SetValue(o, UInt16.MaxValue); break;
+                    case DataNames.FullName_Char: member.SetValue(o, Char.MaxValue); break;
+                    case DataNames.FullName_Int16: member.SetValue(o, Int16.MaxValue); break;
+                    case DataNames.FullName_UInt16: member.SetValue(o, UInt16.MaxValue); break;
 
                     // 4
-                    case DataNames.FullName_Int32: prop.info.SetValue(o, Int32.MaxValue); break;
-                    case DataNames.FullName_UInt32: prop.info.SetValue(o, UInt32.MaxValue); break;
-                    case DataNames.FullName_Single: prop.info.SetValue(o, Single.MaxValue); break;
+                    case DataNames.FullName_Int32: member.SetValue(o, Int32.MaxValue); break;
+                    case DataNames.FullName_UInt32: member.SetValue(o, UInt32.MaxValue); break;
+                    case DataNames.FullName_Single: member.SetValue(o, Single.MaxValue); break;
 
                     // 8
-                    case DataNames.FullName_Double: prop.info.SetValue(o, Double.MaxValue); break;
-                    case DataNames.FullName_Int64: prop.info.SetValue(o, Int64.MaxValue); break;
+                    case DataNames.FullName_Double: member.SetValue(o, Double.MaxValue); break;
+                    case DataNames.FullName_Int64: member.SetValue(o, Int64.MaxValue); break;
 
                     // 16
-                    case DataNames.FullName_Decimal: prop.info.SetValue(o, Decimal.MaxValue); break;
+                    case DataNames.FullName_Decimal: member.SetValue(o, Decimal.MaxValue); break;
 
                     // ref
-                    case DataNames.FullName_String: prop.info.SetValue(o, RandomString()); break;
-                    case DataNames.FullName_DateTime: prop.info.SetValue(o, DateTime.MaxValue); break;
+                    case DataNames.FullName_String: member.SetValue(o, RandomString()); break;
+                    case DataNames.FullName_DateTime: member.SetValue(o, DateTime.MaxValue); break;
                     case DataNames.FullName_Guid:
-                        prop.info.SetValue(o, new Guid(
+                        member.SetValue(o, new Guid(
                         int.MaxValue, short.MaxValue, short.MaxValue,
                         byte.MaxValue, byte.MaxValue, byte.MaxValue, byte.MaxValue,
                         byte.MaxValue, byte.MaxValue, byte.MaxValue, byte.MaxValue)
@@ -93,41 +93,40 @@ namespace SAS.Public.Def.Data
             }
         }
 
-
-        public void FillPropsRandom<T>(T o) where T : class, new()
+        public void FillMembersRandom<T>(T o) where T : class, new()
         {
-            var props = DataTypes.Instance.CheckProps<T>();
+            var members = DataTypes.Instance.CheckMembers<T>();
 
-            foreach (var prop in props)
+            foreach (var member in members)
             {
-                switch (prop.typeFullname)
+                switch (member.TypeFullName)
                 {
                     // 1
-                    case DataNames.FullName_Boolean: prop.info.SetValue(o, Random.Shared.Next(0, 2) == 0); break;
-                    case DataNames.FullName_Byte: prop.info.SetValue(o, (byte)Random.Shared.Next(Byte.MinValue, Byte.MaxValue)); break;
-                    case DataNames.FullName_SByte: prop.info.SetValue(o, (sbyte)Random.Shared.Next(SByte.MinValue, SByte.MaxValue)); break;
+                    case DataNames.FullName_Boolean: member.SetValue(o, RandomBoolean()); break;
+                    case DataNames.FullName_Byte: member.SetValue(o, RandomByte()); break;
+                    case DataNames.FullName_SByte: member.SetValue(o, RandomSByte()); break;
 
                     // 2
-                    case DataNames.FullName_Char: prop.info.SetValue(o, (char)Random.Shared.Next(Char.MinValue, Char.MaxValue)); break;
-                    case DataNames.FullName_Int16: prop.info.SetValue(o, (short)Random.Shared.Next(Int16.MinValue, Int16.MaxValue)); break;
-                    case DataNames.FullName_UInt16: prop.info.SetValue(o, (ushort)Random.Shared.Next(UInt16.MinValue, UInt16.MaxValue)); break;
+                    case DataNames.FullName_Char: member.SetValue(o, RandomChar()); break;
+                    case DataNames.FullName_Int16: member.SetValue(o, RandomInt16()); break;
+                    case DataNames.FullName_UInt16: member.SetValue(o, RandomUInt16()); break;
 
                     // 4
-                    case DataNames.FullName_Int32: prop.info.SetValue(o, (int)Random.Shared.Next(Int32.MinValue, Int32.MaxValue)); break;
-                    case DataNames.FullName_UInt32: prop.info.SetValue(o, (uint)Random.Shared.NextInt64(0, UInt32.MaxValue)); break;
-                    case DataNames.FullName_Single: prop.info.SetValue(o, (float)Random.Shared.NextSingle() * Single.MaxValue); break;
+                    case DataNames.FullName_Int32: member.SetValue(o, RandomInt32()); break;
+                    case DataNames.FullName_UInt32: member.SetValue(o, RandomUInt32()); break;
+                    case DataNames.FullName_Single: member.SetValue(o, RandomSingle()); break;
 
                     // 8
-                    case DataNames.FullName_Double: prop.info.SetValue(o, (double)Random.Shared.NextDouble() * Double.MaxValue); break;
-                    case DataNames.FullName_Int64: prop.info.SetValue(o, (long)Random.Shared.NextInt64(Int64.MinValue, Int64.MaxValue)); break;
+                    case DataNames.FullName_Double: member.SetValue(o, RandomDouble()); break;
+                    case DataNames.FullName_Int64: member.SetValue(o, RandomInt64()); break;
 
                     // 16
-                    case DataNames.FullName_Decimal: prop.info.SetValue(o, (decimal)((uint)Random.Shared.NextSingle() * Decimal.MaxValue)); break;
+                    case DataNames.FullName_Decimal: member.SetValue(o, RandomDecimal()); break;
 
                     // ref
-                    case DataNames.FullName_String: prop.info.SetValue(o, RandomString()); break;
-                    case DataNames.FullName_DateTime: prop.info.SetValue(o, RandomDatetime()); break;
-                    case DataNames.FullName_Guid: prop.info.SetValue(o, Guid.NewGuid()); break;
+                    case DataNames.FullName_String: member.SetValue(o, RandomString()); break;
+                    case DataNames.FullName_DateTime: member.SetValue(o, RandomDateTime()); break;
+                    case DataNames.FullName_Guid: member.SetValue(o, Guid.NewGuid()); break;
 
                     default: break;
                 }
@@ -148,19 +147,41 @@ namespace SAS.Public.Def.Data
             return new String(stringChars);
         }
 
-        public DateTime RandomDatetime()
+        public DateTime RandomDateTime()
         {
-            var rndDays = RandomNumberGenerator.GetInt32(-100, 100);
-            var rndHours = RandomNumberGenerator.GetInt32(1, 24);
-            var rndMinutes = RandomNumberGenerator.GetInt32(1, 60);
-            var rndSeconds = RandomNumberGenerator.GetInt32(1, 60);
-            var rndDatetime = DateTime.Now
-                .AddDays(rndDays)
-                .AddHours(rndHours)
-                .AddMinutes(rndMinutes)
-                .AddSeconds(rndSeconds);
-
-            return rndDatetime;
+            var rndUInt64 = (ulong)(BitConverter.ToUInt64(RandomNumberGenerator.GetBytes(sizeof(long))));
+            var rndDateTimeBinary = (long)(rndUInt64 % 3_155_378_976_000_000_000);
+            var rndDateTime = DateTime.FromBinary(rndDateTimeBinary);
+            return rndDateTime;
         }
+
+        public Guid RandomGuid()
+        {
+            return Guid.NewGuid();
+        }
+
+        public bool RandomBoolean() { return (bool)((RandomNumberGenerator.GetBytes(1)[0] & 0b100) == 0); }
+        public byte RandomByte() { return (byte)(RandomNumberGenerator.GetBytes(1)[0]); }
+        public sbyte RandomSByte() { return (sbyte)(RandomNumberGenerator.GetBytes(1)[0]); }
+        public char RandomChar() { return (char)(BitConverter.ToChar(RandomNumberGenerator.GetBytes(sizeof(char)))); }
+        public short RandomInt16() { return (short)(BitConverter.ToInt16(RandomNumberGenerator.GetBytes(sizeof(short)))); }
+        public ushort RandomUInt16() { return (ushort)(BitConverter.ToUInt16(RandomNumberGenerator.GetBytes(sizeof(ushort)))); }
+        public int RandomInt32() { return (int)(BitConverter.ToInt32(RandomNumberGenerator.GetBytes(sizeof(int)))); }
+        public uint RandomUInt32() { return (uint)(BitConverter.ToUInt32(RandomNumberGenerator.GetBytes(sizeof(uint)))); }
+        public float RandomSingle() { return (float)(BitConverter.ToSingle(RandomNumberGenerator.GetBytes(sizeof(float)))); }
+        public double RandomDouble() { return (double)(BitConverter.ToDouble(RandomNumberGenerator.GetBytes(sizeof(double)))); }
+        public long RandomInt64() { return (long)(BitConverter.ToInt64(RandomNumberGenerator.GetBytes(sizeof(long)))); }
+        public decimal RandomDecimal() {
+            var bytes = RandomNumberGenerator.GetBytes(13);
+            
+            var int1 = BitConverter.ToInt32(bytes, 0);
+            var int2 = BitConverter.ToInt32(bytes, 4);
+            var int3 = BitConverter.ToInt32(bytes, 8);
+            var sign = (bytes[8] & 0b100) == 0;
+            var scale = (byte)(bytes[12] % 28);
+            
+            return (new decimal(int1, int2, int3, sign, scale));
+        }
+
     }
 }

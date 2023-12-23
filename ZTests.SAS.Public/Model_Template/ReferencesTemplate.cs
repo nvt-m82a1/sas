@@ -1,9 +1,17 @@
-﻿using SAS.Public.Tests.ModelTests;
+﻿using SAS.Public.Def.Data;
+using ZTests.SAS.Public.Model_Value;
 
-namespace ZTests.SAS.Public.ModelTemplateTests
+namespace ZTests.SAS.Public.Model_Template
 {
     public class ReferencesTemplate
     {
+        public static ReferencesValue ReferencesValueRandom => new ReferencesValue()
+        {
+            mstring = DataRandom.Instance.RandomString(),
+            mguid = DataRandom.Instance.RandomGuid(),
+            mdatetime = DataRandom.Instance.RandomDateTime(),
+        };
+
         public static ReferencesValue ReferencesValue = new ReferencesValue()
         {
             mstring = "abc",

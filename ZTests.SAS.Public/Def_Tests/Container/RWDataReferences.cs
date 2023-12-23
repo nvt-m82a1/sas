@@ -9,7 +9,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_String()
         {
-            var template = ModelTemplateTests.ReferencesTemplate.StringSamples;
+            var template = Model_Template.ReferencesTemplate.StringSamples;
             var dataWriter = new DataWriter();
             foreach (var item in template)
             {
@@ -44,7 +44,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_String_Unicode()
         {
-            var template = ModelTemplateTests.ReferencesTemplate.StringUnicodeSamples;
+            var template = Model_Template.ReferencesTemplate.StringUnicodeSamples;
             var dataWriter = new DataWriter();
             foreach (var item in template)
             {
@@ -79,7 +79,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_DateTime()
         {
-            var template = ModelTemplateTests.ReferencesTemplate.DateTimeSamples;
+            var template = Model_Template.ReferencesTemplate.DateTimeSamples;
             var dataWriter = new DataWriter();
             foreach (var item in template)
             {
@@ -96,7 +96,7 @@ namespace ZTests.SAS.Public.Def.Container
         [TestMethod]
         public void RW_data_Guid()
         {
-            var template = ModelTemplateTests.ReferencesTemplate.GuidSamples;
+            var template = Model_Template.ReferencesTemplate.GuidSamples;
             var dataWriter = new DataWriter();
             foreach (var item in template)
             {

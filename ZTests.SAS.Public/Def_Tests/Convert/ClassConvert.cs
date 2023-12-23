@@ -1,6 +1,6 @@
 ﻿using SAS.Public.Def.Convert;
-using ZTests.SAS.Public.ModelTemplateTests;
-using ZTests.SAS.Public.ModelTests;
+using ZTests.SAS.Public.Model_Template;
+using ZTests.SAS.Public.Model_Value;
 
 namespace ZTests.SAS.Public.Def.Convert
 {
@@ -8,11 +8,11 @@ namespace ZTests.SAS.Public.Def.Convert
     public class ClassConvert
     {
         [TestMethod]
-        public void Class_props()
+        public void Class_member()
         {
-            var template = PropsTemplate.PropsValueSample;
+            var template = MembersTemplate.MembersValueRandom;
             var bytes = DataConvert.Instance.ToBytes(template);
-            var output = DataConvert.Instance.ToClass<PropsValue>(bytes);
+            var output = DataConvert.Instance.ToClass<MembersValue>(bytes);
 
             Assert.AreEqual(template.mbool, output.mbool);
             Assert.AreEqual(template.mbyte, output.mbyte);
@@ -29,6 +29,19 @@ namespace ZTests.SAS.Public.Def.Convert
             Assert.AreEqual(template.mstring, output.mstring);
             Assert.AreEqual(template.mdatetime, output.mdatetime);
             Assert.AreEqual(template.mguid, output.mguid);
+        }
+
+        [TestMethod]
+        public void Class_members_large()
+        {
+            for (var i = 0; i < 1_000_000; i++)
+            {
+                var template = MembersTemplate.MembersValueRandom;
+                var bytes = DataConvert.Instance.ToBytes(template);
+                var output = DataConvert.Instance.ToClass<MembersValue>(bytes);
+
+                Assert.IsTrue(template.Compare(output));
+            }
         }
     }
 }
