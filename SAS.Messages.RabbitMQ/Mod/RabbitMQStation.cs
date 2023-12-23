@@ -2,7 +2,6 @@
 using RabbitMQ.Client.Events;
 using SAS.Messages.Mod;
 using System.Collections.Concurrent;
-using System.Net;
 
 namespace SAS.Messages.RabbitMQ.Mod
 {
@@ -40,7 +39,7 @@ namespace SAS.Messages.RabbitMQ.Mod
             return Task.CompletedTask;
         }
 
-        public override async Task<bool> Registry(Address address, Mailbox mailbox)
+        public override async Task<bool> Registry(Address address, Mailbox mailbox, CancellationToken ctok = default)
         {
             if (connection == null) return false;
 
@@ -95,28 +94,30 @@ namespace SAS.Messages.RabbitMQ.Mod
             return true;
         }
 
-        public override Task<bool> Publish(Address address, Message message)
+        public override async Task<bool> Publish(Address address, Message message, CancellationToken ctok = default)
         {
             if (!address.ValidExchaneRouting)
             {
-                return Task.FromResult(false);
+                return false;
             }
 
-            if (map.Has(address.Channel))
+            if (!map.Has(address.Channel))
             {
-                var channel = map[address.Channel]!.Data as IModel;
-                var props = channel!.CreateBasicProperties();
-                props.MessageId = message.Id;
-                props.CorrelationId = message.CorrelationId;
-                props.Priority = message.Priority;
-                props.UserId = message.UserId;
-                props.Type = message.Type;
-                props.DeliveryMode = 2;
-                props.Headers = message.Header;
-                channel.BasicPublish(address.Exchange, address.RoutingKey, props, message.Body);
+                await Connect(address.Channel);
             }
 
-            return Task.FromResult(true);
+            var channel = map[address.Channel]!.Data as IModel;
+            var props = channel!.CreateBasicProperties();
+            props.MessageId = message.Id;
+            props.CorrelationId = message.CorrelationId;
+            props.Priority = message.Priority;
+            props.UserId = message.UserId;
+            props.Type = message.Type;
+            props.DeliveryMode = 2;
+            props.Headers = message.Header;
+            channel.BasicPublish(address.Exchange, address.RoutingKey, props, message.Body);
+
+            return true;
         }
     }
 }

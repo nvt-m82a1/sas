@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZTests.SAS", "ZTests.SAS\ZT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Manage.Databases", "SAS.Manage.Databases\SAS.Manage.Databases.csproj", "{0EEEBBBE-1FC9-4E63-B7D4-4C14593B1C28}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Messages.Kafka", "SAS.Messages.Kafka\SAS.Messages.Kafka.csproj", "{6F44439E-7C56-4E9A-B1F2-DEFA35BD90F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +108,12 @@ Global
 		{0EEEBBBE-1FC9-4E63-B7D4-4C14593B1C28}.Debug-all|Any CPU.Build.0 = Debug|Any CPU
 		{0EEEBBBE-1FC9-4E63-B7D4-4C14593B1C28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EEEBBBE-1FC9-4E63-B7D4-4C14593B1C28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F44439E-7C56-4E9A-B1F2-DEFA35BD90F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F44439E-7C56-4E9A-B1F2-DEFA35BD90F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F44439E-7C56-4E9A-B1F2-DEFA35BD90F9}.Debug-all|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F44439E-7C56-4E9A-B1F2-DEFA35BD90F9}.Debug-all|Any CPU.Build.0 = Debug|Any CPU
+		{6F44439E-7C56-4E9A-B1F2-DEFA35BD90F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F44439E-7C56-4E9A-B1F2-DEFA35BD90F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

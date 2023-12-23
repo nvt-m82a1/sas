@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SAS.Messages.RabbitMQ\SAS.Messages.RabbitMQ.csproj" />
     <ProjectReference Include="..\SAS.Public\SAS.Public.csproj" />
+    <ProjectReference Include="..\ZTests.SAS.Public\ZTests.SAS.Public.csproj" />
   </ItemGroup>
 
 </Project>
