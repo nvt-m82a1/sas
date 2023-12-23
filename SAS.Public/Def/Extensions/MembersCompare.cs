@@ -2,7 +2,7 @@
 
 namespace SAS.Public.Def.Extensions
 {
-    public class PropsCompare
+    public class MembersCompare
     {
         public static (bool same, string? firstDiff) Compare<T>(T expected, T actual) where T : class
         {

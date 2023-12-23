@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SAS.Messages.Kafka\SAS.Messages.Kafka.csproj" />
+    <ProjectReference Include="..\ZTests.SAS.Public\ZTests.SAS.Public.csproj" />
+    <ProjectReference Include="..\ZTests.SAS\ZTests.SAS.csproj" />
+  </ItemGroup>
+
 </Project>

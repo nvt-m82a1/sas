@@ -16,7 +16,7 @@ namespace ZTests.SAS.Public.Def.Extensions
 
             var bytes = DataConvert.Instance.ToBytes(value);
             var rended = DataConvert.Instance.ToClass<MembersValue>(bytes);
-            var compare = PropsCompare.Compare(value, rended);
+            var compare = MembersCompare.Compare(value, rended);
 
             Assert.IsTrue(compare.same);
         }
@@ -29,7 +29,7 @@ namespace ZTests.SAS.Public.Def.Extensions
 
             var bytes = DataConvert.Instance.ToBytes(value);
             var rended = DataConvert.Instance.ToClass<MembersValue>(bytes);
-            var compare = PropsCompare.Compare(value, rended);
+            var compare = MembersCompare.Compare(value, rended);
 
             Assert.IsTrue(compare.same);
         }
@@ -42,7 +42,7 @@ namespace ZTests.SAS.Public.Def.Extensions
 
             var bytes = DataConvert.Instance.ToBytes(value);
             var rended = DataConvert.Instance.ToClass<MembersValue>(bytes);
-            var compare = PropsCompare.Compare(value, rended);
+            var compare = MembersCompare.Compare(value, rended);
 
             Assert.IsTrue(compare.same);
         }
