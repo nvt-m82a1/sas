@@ -1,5 +1,5 @@
-﻿using SAS.Manage.Scheduler.Databases;
-using SAS.Manage.Scheduler.Databases.Entities;
+﻿using SAS.Manage.Databases;
+using SAS.Manage.Databases.Entities;
 using SAS.Messages.Abs;
 using SAS.Messages.Mod;
 using SAS.Public.Def.Convert;

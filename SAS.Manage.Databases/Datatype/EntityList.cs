@@ -1,8 +1,8 @@
 ﻿using System.Collections.Concurrent;
 
-namespace SAS.Manage.Scheduler.Databases.Datatype
+namespace SAS.Manage.Databases.Datatype
 {
-    internal class EntityList<T> : List<T>, IEntityList<T> where T : IEntity
+    public class EntityList<T> : List<T>, IEntityList<T> where T : IEntity
     {
         private ConcurrentDictionary<Guid, T> cached = new ConcurrentDictionary<Guid, T>();
 

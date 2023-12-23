@@ -1,8 +1,8 @@
-﻿using SAS.Manage.Scheduler.Databases.Datatype;
+﻿using SAS.Manage.Databases.Datatype;
 
-namespace SAS.Manage.Scheduler.Databases.Entities
+namespace SAS.Manage.Databases.Entities
 {
-    internal class Ordertype : IEntity
+    public class Ordertype : IEntity
     {
         public Guid Id { get; set; }
         public string? Typename { get; set; }

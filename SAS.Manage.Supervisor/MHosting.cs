@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SAS.Manage.Scheduler.Handler;
-using SAS.Manage.Scheduler.Mailboxs;
-using SAS.Manage.Scheduler.Mod;
-using SAS.Manage.Scheduler.ServiceJobs;
-using SAS.Messages.Abs;
+using SAS.Manage.Supervisor.Mailboxs;
+using SAS.Manage.Supervisor.Mod;
 using SAS.Messages.RabbitMQ.Mod;
 
 namespace SAS.Manage.Scheduler
@@ -19,14 +16,8 @@ namespace SAS.Manage.Scheduler
             {
                 services.AddSingleton<Connector>();
                 services.AddSingleton<MManage>();
-                services.AddSingleton<MScheduler>();
                 services.AddSingleton<RabbitMQStation>();
 
-                services.AddKeyedScoped<IMessageHandler, NewOrderHandler>("new.order");
-                services.AddKeyedScoped<IMessageHandler, UpdateStateHandler>("update.state");
-
-                services.AddHostedService<UpdateTimeAnalyst>();
-                services.AddHostedService<ScanLateIncome>();
             });
 
             var host = builder.Build();

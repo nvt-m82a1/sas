@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
-using SAS.Manage.Scheduler.Databases;
+using SAS.Manage.Databases;
 
 namespace SAS.Manage.Scheduler.ServiceJobs
 {

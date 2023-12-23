@@ -1,9 +1,9 @@
-﻿using SAS.Manage.Scheduler.Databases.Datatype;
-using SAS.Manage.Scheduler.Databases.Entities;
+﻿using SAS.Manage.Databases.Datatype;
+using SAS.Manage.Databases.Entities;
 
-namespace SAS.Manage.Scheduler.Databases
+namespace SAS.Manage.Databases
 {
-    internal class MDatabases
+    public class MDatabases
     {
         public static MDatabases Instance = new MDatabases();
         private MDatabases()
@@ -17,6 +17,6 @@ namespace SAS.Manage.Scheduler.Databases
         public IEntityList<Order> Orders { get; set; }
         public IEntityList<State> States { get; set; }
         public IEntityList<Status> Status { get; set; }
-        public IEntityList<Ordertype> Ordertypes { get; set;}
+        public IEntityList<Ordertype> Ordertypes { get; set; }
     }
 }

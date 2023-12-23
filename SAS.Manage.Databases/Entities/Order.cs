@@ -1,6 +1,6 @@
-﻿using SAS.Manage.Scheduler.Databases.Datatype;
+﻿using SAS.Manage.Databases.Datatype;
 
-namespace SAS.Manage.Scheduler.Databases.Entities
+namespace SAS.Manage.Databases.Entities
 {
     public class Order : IEntity
     {
