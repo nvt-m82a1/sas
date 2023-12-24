@@ -1,6 +1,6 @@
 ﻿using SAS.Public.Def.Container;
 
-namespace ZTests.SAS.Public.Def.Container
+namespace ZTests.SAS.Public.Def_Tests.Container
 {
     [TestClass]
     public class RWDataTypes

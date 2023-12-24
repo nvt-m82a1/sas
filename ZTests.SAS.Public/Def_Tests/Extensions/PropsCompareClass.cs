@@ -18,7 +18,7 @@ namespace ZTests.SAS.Public.Def.Extensions
             var rended = DataConvert.Instance.ToClass<MembersValue>(bytes);
             var compare = MembersCompare.Compare(value, rended);
 
-            Assert.IsTrue(compare.same);
+            Assert.IsTrue(compare.IsEqual);
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@ namespace ZTests.SAS.Public.Def.Extensions
             var rended = DataConvert.Instance.ToClass<MembersValue>(bytes);
             var compare = MembersCompare.Compare(value, rended);
 
-            Assert.IsTrue(compare.same);
+            Assert.IsTrue(compare.IsEqual);
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace ZTests.SAS.Public.Def.Extensions
             var rended = DataConvert.Instance.ToClass<MembersValue>(bytes);
             var compare = MembersCompare.Compare(value, rended);
 
-            Assert.IsTrue(compare.same);
+            Assert.IsTrue(compare.IsEqual);
         }
     }
 }

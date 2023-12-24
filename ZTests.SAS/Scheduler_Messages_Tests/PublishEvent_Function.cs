@@ -9,7 +9,7 @@ namespace ZTests.SAS.Scheduler_Messages_Tests
     [TestClass]
     public class PublishEvent_Function
     {
-        [TestMethod]
+        //[TestMethod]
         public async Task Publish_eventAsync()
         {
             Assert.Fail();

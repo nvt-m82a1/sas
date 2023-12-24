@@ -19,7 +19,7 @@ namespace SAS.Public.Def.Container
         private int dataIter;
         // End Data read
 
-        private DataReader() { }
+        protected DataReader() { }
         public DataReader(byte[] bytes)
         {
             buffer = bytes;
@@ -37,8 +37,7 @@ namespace SAS.Public.Def.Container
         // Data types
         public bool ReadBoolean()
         {
-            var data = BitConverter.ToBoolean(buffer, dataIter);
-            dataIter += sizeof(bool);
+            var data = ReadFlag();
             return data;
         }
 
@@ -56,34 +55,24 @@ namespace SAS.Public.Def.Container
             return (sbyte)data;
         }
 
+        public short ReadShort()
+        {
+            var data = BitConverter.ToInt16(buffer, dataIter);
+            dataIter += sizeof(short);
+            return data;
+        }
+
+        public ushort ReadUShort()
+        {
+            var data = BitConverter.ToUInt16(buffer, dataIter);
+            dataIter += sizeof(ushort);
+            return data;
+        }
+
         public char ReadChar()
         {
             var data = BitConverter.ToChar(buffer, dataIter);
             dataIter += sizeof(char);
-            return data;
-        }
-
-        public decimal ReadDecimal()
-        {
-            var int1 = ReadInt();
-            var int2 = ReadInt();
-            var int3 = ReadInt();
-            var int4 = ReadInt();
-            var data = new Decimal([int1, int2, int3, int4]);
-            return data;
-        }
-
-        public double ReadDouble()
-        {
-            var data = BitConverter.ToDouble(buffer, dataIter);
-            dataIter += sizeof(double);
-            return data;
-        }
-
-        public float ReadFloat()
-        {
-            var data = BitConverter.ToSingle(buffer, dataIter);
-            dataIter += sizeof(float);
             return data;
         }
 
@@ -101,6 +90,20 @@ namespace SAS.Public.Def.Container
             return data;
         }
 
+        public double ReadDouble()
+        {
+            var data = BitConverter.ToDouble(buffer, dataIter);
+            dataIter += sizeof(double);
+            return data;
+        }
+
+        public float ReadFloat()
+        {
+            var data = BitConverter.ToSingle(buffer, dataIter);
+            dataIter += sizeof(float);
+            return data;
+        }
+
         public nint ReadNInt()
         {
             throw new NotImplementedException();
@@ -113,17 +116,13 @@ namespace SAS.Public.Def.Container
             return data;
         }
 
-        public short ReadShort()
+        public decimal ReadDecimal()
         {
-            var data = BitConverter.ToInt16(buffer, dataIter);
-            dataIter += sizeof(short);
-            return data;
-        }
-
-        public ushort ReadUShort()
-        {
-            var data = BitConverter.ToUInt16(buffer, dataIter);
-            dataIter += sizeof(ushort);
+            var int1 = ReadInt();
+            var int2 = ReadInt();
+            var int3 = ReadInt();
+            var int4 = ReadInt();
+            var data = new decimal([int1, int2, int3, int4]);
             return data;
         }
         // End Data types
@@ -131,28 +130,25 @@ namespace SAS.Public.Def.Container
         // Nullable types
         public string? ReadString(Encoding? encoding = null)
         {
-            var flag = ReadFlag();
-            if (flag)
+            if (ReadFlag())
             {
-                var byteLength = ReadInt();
-                var bytes = new ReadOnlySpan<byte>(buffer, dataIter, byteLength);
-                var _encoding = encoding ?? Encoding.UTF8;
-                var data = _encoding.GetString(bytes);
-                dataIter += byteLength;
-                return data;
+                if (ReadFlag())
+                {
+                    var byteLength = ReadInt();
+                    var bytes = new ReadOnlySpan<byte>(buffer, dataIter, byteLength);
+                    var _encoding = encoding ?? Encoding.UTF8;
+                    var data = _encoding.GetString(bytes);
+                    dataIter += byteLength;
+                    return data;
+                }
+                return string.Empty;
             }
-            else
-            {
-                var isEmpty = ReadFlag();
-                if (isEmpty) return string.Empty;
-                return null;
-            }
+            return null;
         }
 
         public Guid? ReadGuid()
         {
-            var flag = ReadFlag();
-            if (flag)
+            if (ReadFlag())
             {
                 var bytes = new ReadOnlySpan<byte>(buffer, dataIter, 16);
                 var data = new Guid(bytes);
@@ -164,8 +160,7 @@ namespace SAS.Public.Def.Container
 
         public DateTime? ReadDateTime()
         {
-            var flag = ReadFlag();
-            if (flag)
+            if (ReadFlag())
             {
                 var datetimeNum = ReadLong();
                 var data = DateTime.FromBinary(datetimeNum);
@@ -178,7 +173,7 @@ namespace SAS.Public.Def.Container
         // Flag setting
         public bool ReadFlag()
         {
-            var flag = (buffer[flagIter] & (1 << flagBitIndex)) == 0 ? false : true;
+            var flag = (buffer[flagIter] & 1 << flagBitIndex) == 0 ? false : true;
             flagBitIndex++;
             if (flagBitIndex >= 8)
             {

@@ -4,7 +4,13 @@ namespace SAS.Public.Def.Extensions
 {
     public class MembersCompare
     {
-        public static (bool same, string? firstDiff) Compare<T>(T expected, T actual) where T : class
+        public class CompareResult
+        {
+            public bool IsEqual { get; set; }
+            public string? FirstDiff { get; set; }
+        }
+
+        public static CompareResult Compare<T>(T expected, T actual) where T : class
         {
             var members = DataTypes.Instance.CheckMembers<T>();
 
@@ -54,10 +60,10 @@ namespace SAS.Public.Def.Extensions
 
                     default: equal = Object.ReferenceEquals(left, right); break;
                 }
-                if (!equal) return (false, member.Name());
+                if (!equal) return new CompareResult() { IsEqual = false, FirstDiff = member.Name() };
             }
 
-            return (true, null);
+            return new CompareResult() { IsEqual = true };
         }
     }
 }

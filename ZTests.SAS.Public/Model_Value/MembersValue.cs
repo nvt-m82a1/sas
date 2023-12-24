@@ -19,28 +19,4 @@
         public DateTime? mdatetime { get; set; }
         public Guid? mguid { get; set; }
     }
-
-    public static class MembersValueExtensions
-    {
-        public static bool Compare(this MembersValue self, MembersValue other)
-        {
-            var equal = self.mbool == other.mbool &&
-                self.mbyte == other.mbyte &&
-                self.msbyte == other.msbyte &&
-                self.mchar == other.mchar &&
-                self.mdecimal == other.mdecimal &&
-                self.mdouble == other.mdouble &&
-                self.mfloat == other.mfloat &&
-                self.mint == other.mint &&
-                self.muint == other.muint &&
-                self.mlong == other.mlong &&
-                self.mshort == other.mshort &&
-                self.mushort == other.mushort &&
-                self.mstring == other.mstring &&
-                self.mguid == other.mguid &&
-                self.mdatetime == other.mdatetime;
-
-            return equal;
-        }
-    }
 }

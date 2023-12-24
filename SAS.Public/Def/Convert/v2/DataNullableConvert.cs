@@ -1,20 +1,23 @@
-﻿using SAS.Public.Def.Container;
+﻿using SAS.Public.Def.Container.v2;
 
-namespace SAS.Public.Def.Convert
+namespace SAS.Public.Def.Convert.v2
 {
-    public class DataConvert
+    public class DataNullableConvert
     {
-        public static DataConvert Instance = new DataConvert();
-        protected DataConvert() { }
+        public static DataNullableConvert Instance = new DataNullableConvert();
+        protected DataNullableConvert() { }
 
         public byte[] ToBytes<T>(T o) where T : class
         {
             var members = DataTypes.Instance.CheckMembers<T>();
 
-            var writer = new DataWriter();
+            var writer = new DataNullableWriter();
             foreach (var member in members)
             {
                 var value = member.GetValue(o);
+
+                writer.AddFlag(value != null);
+                if (value == null) continue;
 
                 switch (member.TypeFullName)
                 {
@@ -41,9 +44,9 @@ namespace SAS.Public.Def.Convert
                     case DataNames.FullName_Decimal: writer.Add((decimal)value!); break;
 
                     // ref
-                    case DataNames.FullName_String: writer.Add((string?)value!); break;
-                    case DataNames.FullName_DateTime: writer.Add((DateTime?)value!); break;
-                    case DataNames.FullName_Guid: writer.Add((Guid?)value!); break;
+                    case DataNames.FullName_String: writer.Add((string?)value); break;
+                    case DataNames.FullName_DateTime: writer.Add((DateTime?)value); break;
+                    case DataNames.FullName_Guid: writer.Add((Guid?)value); break;
 
                     default: break;
                 }
@@ -57,33 +60,39 @@ namespace SAS.Public.Def.Convert
             var result = new T();
             var members = DataTypes.Instance.CheckMembers<T>();
 
-            var reader = new DataReader(bytes);
+            var reader = new DataNullableReader(bytes);
             foreach (var member in members)
             {
+                if (!reader.ReadFlag())
+                {
+                    member.SetValue(result, null);
+                    continue;
+                }
+
                 switch (member.TypeFullName)
                 {
                     // 1
                     case DataNames.FullName_Boolean: member.SetValue(result, reader.ReadBoolean()); break;
                     case DataNames.FullName_Byte: member.SetValue(result, reader.ReadByte()); break;
                     case DataNames.FullName_SByte: member.SetValue(result, reader.ReadSByte()); break;
-                    
+
                     // 2
                     case DataNames.FullName_Char: member.SetValue(result, reader.ReadChar()); break;
                     case DataNames.FullName_Int16: member.SetValue(result, reader.ReadShort()); break;
                     case DataNames.FullName_UInt16: member.SetValue(result, reader.ReadUShort()); break;
-                    
+
                     // 4
                     case DataNames.FullName_Int32: member.SetValue(result, reader.ReadInt()); break;
                     case DataNames.FullName_UInt32: member.SetValue(result, reader.ReadUInt()); break;
                     case DataNames.FullName_Single: member.SetValue(result, reader.ReadFloat()); break;
-                    
+
                     // 8
                     case DataNames.FullName_Double: member.SetValue(result, reader.ReadDouble()); break;
                     case DataNames.FullName_Int64: member.SetValue(result, reader.ReadLong()); break;
-                    
+
                     // 16
                     case DataNames.FullName_Decimal: member.SetValue(result, reader.ReadDecimal()); break;
-                    
+
                     // ref
                     case DataNames.FullName_String: member.SetValue(result, reader.ReadString()); break;
                     case DataNames.FullName_DateTime: member.SetValue(result, reader.ReadDateTime()); break;

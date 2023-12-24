@@ -17,10 +17,11 @@ namespace SAS.Public.Def.Convert
         {
             public string? TypeFullName;
             public TypeIndex Index = TypeIndex.Unknow;
+            public bool IsNullable;
             public FieldInfo? FieldInfo;
             public PropertyInfo? PropertyInfo;
 
-            public object? GetValue(object obj)
+            public object? GetValue(object? obj)
             {
                 switch (Index)
                 {
@@ -64,12 +65,13 @@ namespace SAS.Public.Def.Convert
                 IEnumerable<TypeResult> fieldsResult = memberFields
                     .Select(p =>
                     {
-                        if (p.FieldType.Name == DataNames.Name_Nulable && p.FieldType.IsGenericType)
+                        if (p.FieldType.Name == DataNames.Name_NulableGeneric && p.FieldType.IsGenericType)
                         {
                             return new TypeResult()
                             {
                                 TypeFullName = p.FieldType.GetGenericArguments()[0].FullName,
                                 Index = TypeIndex.Field,
+                                IsNullable = true,
                                 FieldInfo = p,
                             };
                         }
@@ -79,6 +81,7 @@ namespace SAS.Public.Def.Convert
                             {
                                 TypeFullName = p.FieldType.FullName,
                                 Index = TypeIndex.Field,
+                                IsNullable = false,
                                 FieldInfo = p,
                             };
                         }
@@ -88,12 +91,13 @@ namespace SAS.Public.Def.Convert
                 IEnumerable<TypeResult> propsResult = memberProps
                     .Select(p =>
                     {
-                        if (p.PropertyType.Name == DataNames.Name_Nulable && p.PropertyType.IsGenericType)
+                        if (p.PropertyType.Name == DataNames.Name_NulableGeneric && p.PropertyType.IsGenericType)
                         {
                             return new TypeResult()
                             {
                                 TypeFullName = p.PropertyType.GetGenericArguments()[0].FullName,
                                 Index = TypeIndex.Prop,
+                                IsNullable = true,
                                 PropertyInfo = p,
                             };
                         }
@@ -103,6 +107,7 @@ namespace SAS.Public.Def.Convert
                             {
                                 TypeFullName = p.PropertyType.FullName,
                                 Index = TypeIndex.Prop,
+                                IsNullable = false,
                                 PropertyInfo = p,
                             };
                         }

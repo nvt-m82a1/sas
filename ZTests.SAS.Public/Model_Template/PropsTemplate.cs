@@ -5,7 +5,7 @@ namespace ZTests.SAS.Public.Model_Template
 {
     public class PropsTemplate
     {
-        public static PropsValue PropsValueRandom = new PropsValue()
+        public static PropsValue PropsValueRandom => new PropsValue()
         {
             mbool = DataRandom.Instance.RandomBoolean(),
             mbyte = DataRandom.Instance.RandomByte(),

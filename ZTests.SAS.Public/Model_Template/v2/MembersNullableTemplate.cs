@@ -1,11 +1,30 @@
 ﻿using SAS.Public.Def.Data;
-using ZTests.SAS.Public.Model_Value;
+using ZTests.SAS.Public.Model_Value.v2;
 
-namespace ZTests.SAS.Public.Model_Template
+namespace ZTests.SAS.Public.Model_Template.v2
 {
-    public class MembersTemplate
+    public class MembersNullableTemplate
     {
-        public static MembersValue MembersValueRandom => new MembersValue()
+        public static MembersNullableValue MembersNullableValueNull = new MembersNullableValue()
+        {
+            mbool = null,
+            mbyte = null,
+            msbyte = null,
+            mchar = null,
+            mdecimal = null,
+            mdouble = null,
+            mfloat = null,
+            mint = null,
+            mlong = null,
+            mshort = null,
+            mushort = null,
+
+            mstring = null,
+            mguid = null,
+            mdatetime = null,
+        };
+
+        public static MembersNullableValue MembersNullableValueRandom => new MembersNullableValue()
         {
             mbool = DataRandom.Instance.RandomBoolean(),
             mbyte = DataRandom.Instance.RandomByte(),
