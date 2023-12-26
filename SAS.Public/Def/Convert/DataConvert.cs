@@ -8,7 +8,7 @@ namespace SAS.Public.Def.Convert
         protected DataConvert() { }
 
         public byte[] ToBytes<T>(T o) where T : class
-        {
+        { 
             var members = DataTypes.Instance.CheckMembers<T>();
 
             var writer = new DataWriter();

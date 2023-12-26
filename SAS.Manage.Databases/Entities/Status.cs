@@ -7,8 +7,11 @@ namespace SAS.Manage.Databases.Entities
         public Guid Id { get; set; }
         public DateTime TimeCreated { get; set; }
         public DateTime TimeUpdated { get; set; }
-        public bool IsCompleted { get; set; }
-        public bool IsCanceled { get; set; }
+        public DateTime TimeFinished { get; set; }
+        public bool Filled { get; set; }
+        public bool Completed { get; set; }
+        public bool Canceled { get; set; }
         public int ScanCount { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

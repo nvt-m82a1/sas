@@ -11,5 +11,6 @@ namespace SAS.Manage.Databases.Entities
         public string? Result3 { get; set; }
         public string? Result4 { get; set; }
         public string? Result5 { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

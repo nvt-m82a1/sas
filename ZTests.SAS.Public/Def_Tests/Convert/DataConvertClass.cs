@@ -2,7 +2,7 @@
 using ZTests.SAS.Public.Model_Template;
 using ZTests.SAS.Public.Model_Value;
 
-namespace ZTests.SAS.Public.Def.Convert
+namespace ZTests.SAS.Public.Def_Tests.Convert
 {
     [TestClass]
     public class DataConvertClass

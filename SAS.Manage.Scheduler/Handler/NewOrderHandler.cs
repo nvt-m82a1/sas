@@ -1,5 +1,6 @@
-﻿using SAS.Manage.Databases;
-using SAS.Manage.Databases.Entities;
+﻿using SAS.Manage.Databases.Entities;
+using SAS.Manage.Databases.Mod;
+using SAS.Manage.Databases.Postgresql;
 using SAS.Messages.Abs;
 using SAS.Messages.Mod;
 using SAS.Public.Def.Convert;
@@ -9,16 +10,22 @@ namespace SAS.Manage.Scheduler.Handler
 {
     internal class NewOrderHandler : IMessageHandler
     {
-        public Task Handle(Message message)
+        private AppDatabase MDatabase { get; set; }
+        public NewOrderHandler(AppDatabase MDatabase)
+        {
+            this.MDatabase = MDatabase;
+        }
+
+        public async Task Handle(Message message)
         {
             if (message.Body == null)
             {
-                return Task.CompletedTask;
+                return;
             }
 
             var eventNewOrder = DataConvert.Instance.ToClass<EventNewOrder>(message.Body);
 
-            var type = MDatabases.Instance.Ordertypes.FirstOrDefault(record => record.Typename == eventNewOrder.Typename);
+            var type = await MDatabase.Ordertypes.Find(record => record.Typename == eventNewOrder.Typename);
             if (type == null)
             {
                 var newOrdertype = new Ordertype()
@@ -26,7 +33,7 @@ namespace SAS.Manage.Scheduler.Handler
                     Id = Guid.NewGuid(),
                     Typename = eventNewOrder.Typename,
                 };
-                MDatabases.Instance.Ordertypes.Add(newOrdertype);
+                await MDatabase.Ordertypes.Create(newOrdertype);
                 type = newOrdertype;
             }
 
@@ -36,14 +43,14 @@ namespace SAS.Manage.Scheduler.Handler
                 TypeId = type.Id,
                 Priority = eventNewOrder.Priority,
             };
-            MDatabases.Instance.Orders.Add(newOrder);
+            await MDatabase.Orders.Create(newOrder);
 
             var newState = new State()
             {
                 Id = eventNewOrder.RelationId,
                 ResultCount = eventNewOrder.ResultCount,
             };
-            MDatabases.Instance.States.Add(newState);
+            await MDatabase.States.Create(newState);
 
             var newStatus = new Status()
             {
@@ -51,9 +58,9 @@ namespace SAS.Manage.Scheduler.Handler
                 TimeCreated = DateTime.Now,
                 TimeUpdated = DateTime.Now,
             };
-            MDatabases.Instance.Status.Add(newStatus);
+            await MDatabase.Status.Create(newStatus);
 
-            return Task.CompletedTask;
+            MDatabase.SaveChanged();
         }
     }
 }

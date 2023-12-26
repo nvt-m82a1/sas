@@ -6,32 +6,28 @@ namespace SAS.Public.Def.Data
     {
         public static byte[] Compress(byte[] data)
         {
-            byte[] result;
             using (var stream = new MemoryStream())
             {
                 using (var compressStream = new GZipStream(stream, CompressionMode.Compress))
                 {
                     compressStream.Write(data, 0, data.Length);
                     compressStream.Flush();
+                    return stream.ToArray();
                 }
-                result = stream.ToArray();
             }
-            return result;
         }
 
         public static byte[] Decompress(byte[] data)
         {
-            byte[] result;
             using (var stream = new MemoryStream())
             {
                 using (var dataStream = new MemoryStream(data))
                 {
                     using var decompressStream = new GZipStream(dataStream, CompressionMode.Decompress);
                     decompressStream.CopyTo(stream);
+                    return stream.ToArray();
                 }
-                result = stream.ToArray();
             }
-            return result;
         }
     }
 }

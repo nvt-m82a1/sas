@@ -16,7 +16,7 @@ namespace SAS.Manage.Supervisor.Mod
 
         public async Task Connect()
         {
-            var station = services.GetRequiredService<RabbitMQStation>();
+            var station = services.GetRequiredService<Station>();
             var manage = services.GetRequiredService<MManage>();
 
             await station.Registry(new Address()

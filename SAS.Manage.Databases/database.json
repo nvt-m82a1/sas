@@ -1,0 +1,11 @@
+﻿{
+  "ConnectionStrings": {
+    "PostgreDatabase": "localhost"
+  },
+  "Redis": {
+    "ConnectionString": "localhost:6379",
+    "Options": {
+      "SizeLimit": 1024
+    }
+  }
+}

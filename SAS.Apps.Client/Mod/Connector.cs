@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SAS.Apps.Client.Mailboxs;
 using SAS.Messages.Mod;
-using SAS.Messages.RabbitMQ.Mod;
 
 namespace SAS.Apps.Client.Mod
 {
@@ -16,7 +15,7 @@ namespace SAS.Apps.Client.Mod
 
         public async Task Connect()
         {
-            var station = services.GetRequiredService<RabbitMQStation>();
+            var station = services.GetRequiredService<Station>();
             var client = services.GetRequiredService<MClient>();
 
             await station.Registry(new Address()

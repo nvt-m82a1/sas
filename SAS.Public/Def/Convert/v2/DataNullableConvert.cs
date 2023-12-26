@@ -7,11 +7,17 @@ namespace SAS.Public.Def.Convert.v2
         public static DataNullableConvert Instance = new DataNullableConvert();
         protected DataNullableConvert() { }
 
-        public byte[] ToBytes<T>(T o) where T : class
+        public byte[] ToBytes<T>(T? o) where T : class
         {
-            var members = DataTypes.Instance.CheckMembers<T>();
-
             var writer = new DataNullableWriter();
+
+            writer.AddFlag(o != null);
+            if (o == null)
+            {
+                return writer.ToBytes();
+            }
+
+            var members = DataTypes.Instance.CheckMembers<T>();
             foreach (var member in members)
             {
                 var value = member.GetValue(o);
@@ -55,12 +61,17 @@ namespace SAS.Public.Def.Convert.v2
             return writer.ToBytes();
         }
 
-        public T ToClass<T>(byte[] bytes) where T : class, new()
+        public T? ToClass<T>(byte[] bytes) where T : class, new()
         {
+            var reader = new DataNullableReader(bytes);
+            if (!reader.ReadFlag())
+            {
+                return null;
+            }
+
             var result = new T();
             var members = DataTypes.Instance.CheckMembers<T>();
 
-            var reader = new DataNullableReader(bytes);
             foreach (var member in members)
             {
                 if (!reader.ReadFlag())

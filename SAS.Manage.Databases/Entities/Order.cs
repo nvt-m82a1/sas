@@ -7,5 +7,6 @@ namespace SAS.Manage.Databases.Entities
         public Guid Id { get; set; }
         public Guid TypeId { get; set; }
         public int Priority { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using SAS.Public.Def.Data;
 using SAS.Public.Def.Extensions;
 using ZTests.SAS.Public.Model_Value;
 
-namespace ZTests.SAS.Public.Def.Extensions
+namespace ZTests.SAS.Public.Def_Tests.Extensions
 {
     [TestClass]
     public class PropsCompareClass

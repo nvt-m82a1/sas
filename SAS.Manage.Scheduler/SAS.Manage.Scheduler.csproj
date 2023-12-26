@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SAS.Manage.Databases.Postgresql\SAS.Manage.Databases.Postgresql.csproj" />
     <ProjectReference Include="..\SAS.Manage.Databases\SAS.Manage.Databases.csproj" />
     <ProjectReference Include="..\SAS.Messages.RabbitMQ\SAS.Messages.RabbitMQ.csproj" />
     <ProjectReference Include="..\SAS.Messages\SAS.Messages.csproj" />
