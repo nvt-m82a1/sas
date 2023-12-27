@@ -18,7 +18,7 @@ namespace SAS.Manage.Scheduler.ServiceJobs
             {
                 var completedOrder = await MDatabases.Status.FindAll(record => record.Completed);
 
-                IEnumerable<(Guid TypeId, TimeSpan Duration)> data = MDatabases.ViewTypesTimeAnalyst.Take(20).Select(record =>
+                IEnumerable<(Guid TypeId, TimeSpan Duration)> data = MDatabases.ViewTypesTimeAnalysts.Take(20).Select(record =>
                 (
                     record.TypeId,
                     record.TimeUpdated - record.TimeCreated

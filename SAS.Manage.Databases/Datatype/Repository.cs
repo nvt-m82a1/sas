@@ -99,6 +99,12 @@ namespace SAS.Manage.Databases.Datatype
             return Task.FromResult(items);
         }
 
+        public Task<IEnumerable<T>> Get(int skip, int take)
+        {
+            var items = dbContext.Set<T>().Skip(skip).Take(take).AsNoTracking().AsEnumerable();
+            return Task.FromResult(items);
+        }
+
         public async Task<T> Update(Guid id, T entity)
         {
             await cache.StringSetAsync(entity.Id.ToByteArray(), DataNullableConvert.Instance.ToBytes(entity), TimeSpan.FromMinutes(1)).ConfigureAwait(false);

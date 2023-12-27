@@ -2,6 +2,7 @@
 {
     public interface IRepository<T> where T : class, IEntity
     {
+        public Task<IEnumerable<T>> Get(int skip, int take);
         public Task<T?> Find(Guid id);
         public Task<T?> Find(Predicate<T> predicate);
         public Task<IEnumerable<T>> FindAll(Predicate<T> predicate);

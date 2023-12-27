@@ -1,6 +1,6 @@
 ﻿{
   "ConnectionStrings": {
-    "PostgreDatabase": "localhost"
+    "PostgreDatabase": "Host=localhost:5432;user id=admin,password=admin,database=postgredb"
   },
   "Redis": {
     "ConnectionString": "localhost:6379",
